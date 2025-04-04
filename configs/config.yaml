@@ -1,0 +1,122 @@
+HGAT:
+  project_name: IFCSchemaGraph_HGAT_128_512_128_nce
+  edge_csv: 'Q:\pychem_project\XUT-GeoIFCNet-Master\data\IfcSchemaGraph_dataCache\ifc_schema_edges.csv'
+  node_csv: 'Q:\pychem_project\XUT-GeoIFCNet-Master\data\IfcSchemaGraph_dataCache\ifc_schema_nodes.csv'
+  save_path: 'Q:\pychem_project\XUT-GeoIFCNet-Master\results\IfcSchemaGraph_embedding'
+  cache_path: 'Q:\pychem_project\XUT-GeoIFCNet-Master\data\IfcSchemaGraph_dataCache'
+  gpu_device: "0"
+  edge_direction: "REVERSE"
+  model: HGAT
+  loss: nce_loss
+  feat_seed: 12
+  seed: 95
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  temperature: 0.07
+  max_norm: 1
+  num_epochs: 100
+  in_feat: 128
+  hidden_feats: 512
+  eta_min: 0.00001
+  out_feats: 128
+  num_heads: 3
+
+
+RGCN:
+  project_name: final_test
+  # R_ISG_R_IFG_L_55, R_ISG_F_IFG_L_55, R_ISG_R_IFG_55, R_ISG_F_IFG_55
+  # F_ISG_F_IFG_L_55, F_ISG_R_IFG_L_55, F_ISG_F_IFG_55, F_ISG_R_IFG_55
+  # F_IFG_L_55, R_IFG_L_55, F_IFG_55, R_IFG_55
+  run_name: 'RGCN_1'
+  data_dir: 'Q:\IFCNetCorePro_Test\IFCNetCorePro_graph'
+  save_path: 'Q:\pychem_project\XUT-GeoIFCNet-Master\results\final_test\rgcn_1'
+  ifc_file_graph_cache: 'Q:\pychem_project\XUT-GeoIFCNet-Master\data\IfcFileGraph_dataCache\with_reverse_ifcSchemaGraph\reverse_ifcFileGraph\with_selfLoop\train_test'
+  isg_name: '55_REVERSE_IFCSchemaGraph_HGAT_128_512_128_nce.bin'
+  gpu_device: '0'
+  edge_direction: "REVERSE"
+  model: RGCN
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  num_epochs: 100
+  in_feats: 128
+  hidden_feats: 512
+  num_layers: 1
+  batch_size: 7
+  val_batch_size: 7
+  test_batch_size: 16
+  valid_freq: 1
+  early_stopping: 10
+  eta_min: 0.00001
+  save_freq: 10
+
+
+MVCNN:
+  project_name: val_backbone_network_selection
+  svcnn: 'mobilenet_v3_large'
+  pretraining: True
+  # Q:\IFCNetCorePro_Test\IFCNetCorePro_img
+  # Q:\IFCNetCorePro_Val\IFCNetCorePro_img
+  data_dir: 'Q:\IFCNetCorePro_Test\IFCNetCorePro_img'
+  gpu_device: '0'
+  # 12view_Ifcnet 12view_Edges 12view_Archshapesnet
+  view_name: '12view_Edges'
+  save_path: 'Q:\pychem_project\XUT-GeoIFCNet-Master\results\final_test\mbnv3'
+  # test
+  learning_rate: 0.00001352955784171296
+  weight_decay: 0.00019094898290886048
+#  # val
+#  learning_rate: 0.00001
+#  weight_decay: 0.0001
+  eta_min: 0.00001
+  momentum: 0.9
+  num_views: 12
+  batch_size: 7
+  test_batch_size: 16
+  val_batch_size: 7
+  num_epochs: 100
+  dropout: 0.3
+  early_stopping: 10
+  valid_freq: 1
+
+
+GroupedWeightFusion:
+  project_name: Grouped_Weight_Fusion
+  run_name: group 9
+  gpu_device: '0'
+  val_batch_size: 7
+  test_batch_size: 16
+  k_values: 9
+  save_path: 'Q:\pychem_project\XUT-GeoIFCNet-Master\results\Fusion_output'
+
+   # MVCNN
+  svcnn: 'mobilenet_v3_large'
+  num_views: 12
+  png_data_dir: 'Q:\IFCNetCorePro_Test\IFCNetCorePro_img'
+  view_name: '12view_Edges'
+  MVCNN_Pretrained_model_path: 'Q:\pychem_project\XUT-GeoIFCNet-Master\results\MVCNN_output\test_comparison_experiment\12view_GeoIFCNet\f1_rgcn_model.pth'
+
+  # RGCN
+  graph_data_dir: 'Q:\IFCNetCorePro_Test\IFCNetCorePro_graph'
+  isg_name: '55_REVERSE_IFCSchemaGraph_HGAT_128_512_128_nce.bin'
+  ifc_file_graph_cache: 'Q:\pychem_project\XUT-GeoIFCNet-Master\data\IfcFileGraph_dataCache\with_reverse_ifcSchemaGraph\reverse_ifcFileGraph\with_selfLoop\train_test'
+  edge_direction: "REVERSE"
+  RGCN_Pretrained_model_path: 'Q:\pychem_project\XUT-GeoIFCNet-Master\results\IFG_output\with_reverse_ifcSchemaGraph\reverse_ifcFileGraph\test_with_selfLoop\f1_rgcn_model.pth'
+  in_feats: 128
+  hidden_feats: 512
+
+#  # MVCNN
+#  svcnn: 'mobilenet_v3_large'
+#  num_views: 12
+#  png_data_dir: 'Q:\IFCNetCorePro_VAL\IFCNetCorePro_img'
+#  view_name: '12view_Edges'
+#  MVCNN_Pretrained_model_path: 'Q:\pychem_project\XUT-GeoIFCNet-Master\results\MVCNN_output\val_view_sampling_selection\12view_GeoIFCNet\f1_rgcn_model.pth'
+#
+#  # RGCN
+#  graph_data_dir: 'Q:\IFCNetCorePro_VAL\IFCNetCorePro_graph'
+#  isg_name: '55_REVERSE_IFCSchemaGraph_HGAT_128_512_128_nce.bin'
+#  ifc_file_graph_cache: 'Q:\pychem_project\XUT-GeoIFCNet-Master\data\IfcFileGraph_dataCache\with_reverse_ifcSchemaGraph\reverse_ifcFileGraph\with_selfLoop\2_train_val'
+#  edge_direction: "REVERSE"
+#  RGCN_Pretrained_model_path: 'Q:\pychem_project\XUT-GeoIFCNet-Master\results\IFG_output\with_reverse_ifcSchemaGraph\reverse_ifcFileGraph\with_selfLoop\f1_rgcn_model.pth'
+#  in_feats: 128
+#  hidden_feats: 512
+#
