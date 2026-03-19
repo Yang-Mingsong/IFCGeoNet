@@ -8,7 +8,7 @@ https://figshare.com/s/b1309d851a5a80f6ddc3
 
 
 
-<@article</br>{IFCGeoNet2026,</br>
+@article{IFCGeoNet2026,</br>
     author = {Mingsong Yang and Xinhong Hei and Haining Meng and Kehai Chen and Xinyu Tong and YuChao Li and Qin Zhao},</br>
     title = {Lightweight framework for IFC element classification using multi-view and heterogeneous graph with decision-level fusion},</br>
     journal = {Automation in Construction},</br>
