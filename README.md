@@ -8,13 +8,13 @@ https://figshare.com/s/b1309d851a5a80f6ddc3
 
 
 
-@article{IFCGeoNet2026,
-    author = {Mingsong Yang and Xinhong Hei and Haining Meng and Kehai Chen and Xinyu Tong and YuChao Li and Qin Zhao},
-    title = {Lightweight framework for IFC element classification using multi-view and heterogeneous graph with decision-level fusion},
-    journal = {Automation in Construction},
-    volume = {181},
-    pages = {106660},
-    year = {2026},
-    issn = {0926-5805},
-    doi = {https://doi.org/10.1016/j.autcon.2025.106660}
+<@article</br>{IFCGeoNet2026,</br>
+    author = {Mingsong Yang and Xinhong Hei and Haining Meng and Kehai Chen and Xinyu Tong and YuChao Li and Qin Zhao},</br>
+    title = {Lightweight framework for IFC element classification using multi-view and heterogeneous graph with decision-level fusion},</br>
+    journal = {Automation in Construction},</br>
+    volume = {181},</br>
+    pages = {106660},</br>
+    year = {2026},</br>
+    issn = {0926-5805},</br>
+    doi = {https://doi.org/10.1016/j.autcon.2025.106660}</br>
 }
