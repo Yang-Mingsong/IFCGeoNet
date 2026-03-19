@@ -16,5 +16,5 @@ https://figshare.com/s/b1309d851a5a80f6ddc3
     pages = {106660},</br>
     year = {2026},</br>
     issn = {0926-5805},</br>
-    doi = {https://doi.org/10.1016/j.autcon.2025.106660}</br>
+    doi = {https://doi.org/10.1016/j.autcon.2025.106660 }</br>
 }
